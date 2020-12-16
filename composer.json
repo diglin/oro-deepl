@@ -1,0 +1,24 @@
+{
+  "name": "diglin/oro-deepl",
+  "description": "Allow to extract non translated strings from OroPlatform applications and translate them through deepl web service. A Deepl developer account is required",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sylvain Rayé",
+      "email": "support@diglin.com"
+    }
+  ],
+  "require": {
+    "oro/platform": "4.0.*|4.1.*",
+    "babymarkt/deepl-php-lib": "2.0.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Diglin\\Bundle\\DeeplBundle\\DiglinDeeplBundle\\": ""
+    },
+    "exclude-from-classmap": ["/Tests/"]
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

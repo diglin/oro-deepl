@@ -1,0 +1,43 @@
+system_configuration:
+  groups:
+    deepl_integration_settings:
+      title: 'diglin_deepl.system_configuration.group.deepl_integration_settings.label'
+      icon: 'fa-book'
+
+    api_configuration:
+      title: 'diglin_deepl.system_configuration.group.api_configuration.label'
+
+  fields:
+    diglin_deepl.api_key:
+      data_type: string
+      type: Symfony\Component\Form\Extension\Core\Type\TextType
+      priority: 5
+      options:
+        label: 'diglin_deepl.system_configuration.field.api_key.label'
+        tooltip: 'diglin_deepl.system_configuration.field.api_key.tooltip'
+        required: false
+
+  tree:
+    system_configuration:
+      platform:
+        children:
+          integrations:
+            children:
+              deepl_integration_settings:
+                priority: -20
+                children:
+                  api_configuration:
+                    children:
+                      - diglin_deepl.api_key
+
+    website_configuration:
+      platform:
+        children:
+          integrations:
+            children:
+              deepl_integration_settings:
+                priority: -20
+                children:
+                  api_configuration:
+                    children:
+                      - diglin_deepl.api_key

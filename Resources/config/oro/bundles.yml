@@ -1,0 +1,2 @@
+bundles:
+  - { name: Diglin\Bundle\DeeplBundle\DiglinDeeplBundle, priority: 10 }

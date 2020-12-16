@@ -1,0 +1,12 @@
+diglin_deepl:
+  system_configuration:
+    field:
+      api_key:
+        label: 'Deepl API Key'
+        tooltip: 'Provides your Deepl API Key which can be found after purchase it on <a href="https://www.deepl.com/pro#developer">https://www.deepl.com/pro#developer</a>'
+
+    group:
+      deepl_integration_settings:
+        label: Deepl Settings
+      api_configuration:
+        label: API Configuration

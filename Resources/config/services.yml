@@ -1,0 +1,22 @@
+services:
+#  _defaults:
+#    public: false
+
+  diglin_deepl.command.translate_export:
+    class: Diglin\Bundle\DeeplBundle\Command\TranslationExportCommand
+    arguments:
+      - '@doctrine'
+      - '@oro_translation.provider.language'
+      - '%translator.default_path%'
+    tags:
+      - { name: console.command }
+
+  diglin_deepl.command.translate_load:
+    class: Diglin\Bundle\DeeplBundle\Command\TranslationLoadCommand
+    arguments:
+      - '@doctrine'
+      - '@oro_translation.provider.language'
+      - '%translator.default_path%'
+      - '@translator'
+    tags:
+      - { name: console.command }
