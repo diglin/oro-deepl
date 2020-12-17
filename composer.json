@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Diglin\\Bundle\\DeeplBundle\\DiglinDeeplBundle\\": ""
+      "Diglin\\Bundle\\DeeplBundle\\": ""
     },
     "exclude-from-classmap": ["/Tests/"]
   },
