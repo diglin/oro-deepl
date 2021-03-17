@@ -74,6 +74,10 @@ Load previously generated CSV file and convert it to YAML, import it into the da
 Well, we admit that `diglin:oro:deepl:translate:export` is a long command but at least it describes what it does. 
 If you prefer, you can use this shortcut instead: `d:o:d:t:e` 
 
+## ROADMAP
+
+- Add translation button for backend users in different areas (CMS, products, translation management)- 
+
 ## License
 
 See [MIT](LICENSE.txt) 
