@@ -85,6 +85,11 @@ DESC;
                 InputOption::VALUE_OPTIONAL,
                 'Deepl API Dev Key. API key is looked up 1) at the Oro Config, 2) via the cli parameter, 3) into the var/deepl-license.key'
             )->addOption(
+                'free-license',
+                null,
+                InputOption::VALUE_NONE,
+                'if you use the free license API of Deepl'
+            )->addOption(
                 'disable-deepl',
                 'd',
                 InputOption::VALUE_NONE,
@@ -183,7 +188,7 @@ DESC;
                 }
 
                 if ($simulate) {
-//                    $output->writeln($translation['key'] . ': ' . $translation['englishValue']);
+                    //                    $output->writeln($translation['key'] . ': ' . $translation['englishValue']);
                     $totalChars += (int) mb_strlen($translation['englishValue']);
                 }
 
@@ -355,11 +360,12 @@ DESC;
     {
         if (!$input->getOption('disable-deepl') && !$input->getOption('simulate')) {
             $apiKey = $this->getDeeplApiKey($input);
+            $endpointUrl = $input->getOption('free-license') ? 'api-free.deepl.com' : 'api.deepl.com';
 
             if (empty($apiKey)) {
                 throw new \Exception('DeepL API Key not defined. Please, go to OroPlatform Backoffice, menu System > Configuration > System Configuration > Integrations > DeepL. Or provide the key by the parameter "deepl-api-key" or set the key into the var/deepl-license.key file.');
             } else {
-                $this->deepl = new DeepL($apiKey);
+                $this->deepl = new DeepL($apiKey, 2, $endpointUrl);
             }
         }
     }
