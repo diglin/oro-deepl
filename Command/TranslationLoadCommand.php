@@ -116,7 +116,7 @@ DESC;
             return 0;
         }
 
-        $availableLocales = array_keys($this->languageProvider->getAvailableLanguages());
+        $availableLocales = $this->languageProvider->getAvailableLanguageCodes(true);
 
         $output->writeln(
             sprintf(

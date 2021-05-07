@@ -119,7 +119,7 @@ DESC;
         $domains = explode(',', $input->getOption('domains'));
         $simulate = $input->getOption('simulate');
 
-        $availableLocales = array_keys($this->languageProvider->getAvailableLanguages());
+        $availableLocales = $this->languageProvider->getAvailableLanguageCodes(true);
 
         $output->writeln(
             sprintf(
