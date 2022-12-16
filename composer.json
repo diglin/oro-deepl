@@ -11,7 +11,7 @@
   ],
   "require": {
     "oro/platform": "4.2.*|5.0.*",
-    "babymarkt/deepl-php-lib": "2.0.1"
+    "babymarkt/deepl-php-lib": "4.0.0"
   },
   "autoload": {
     "psr-4": {
