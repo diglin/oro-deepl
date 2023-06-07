@@ -9,7 +9,8 @@
 
 namespace Diglin\Bundle\DeeplBundle\Command;
 
-use BabyMarkt\DeepL\DeepL;
+use DeepL\Translator as DeepL;
+use DeepL\TranslatorOptions;
 use Doctrine\ORM\Query\Expr\Join;
 use Oro\Bundle\TranslationBundle\Entity\Translation;
 use Oro\Bundle\TranslationBundle\Provider\LanguageProvider;
@@ -84,11 +85,6 @@ DESC;
                 null,
                 InputOption::VALUE_OPTIONAL,
                 'Deepl API Dev Key. API key is looked up 1) at the Oro Config, 2) via the cli parameter, 3) into the var/deepl-license.key'
-            )->addOption(
-                'free-license',
-                null,
-                InputOption::VALUE_NONE,
-                'if you use the free license API of Deepl'
             )->addOption(
                 'disable-deepl',
                 'd',
@@ -197,6 +193,7 @@ DESC;
                     'english_value' => $translation['englishValue'],
                     $locale         => $translated,
                 ];
+                break;
             }
 
             $output->writeln('');
@@ -232,9 +229,11 @@ DESC;
         }
 
         if (isset($this->deepl)) {
-            $usageArray = $this->deepl->usage();
-            $output->writeln(sprintf('You have used %s of %s in the current billing period.', $usageArray['character_count'], $usageArray['character_limit']));
+            $usageArray = $this->deepl->getUsage();
+            $output->writeln(sprintf('You have used %s of %s in the current billing period.', $usageArray->character->count, $usageArray->character->limit));
         }
+
+        return 0;
     }
 
     /**
@@ -360,12 +359,10 @@ DESC;
     {
         if (!$input->getOption('disable-deepl') && !$input->getOption('simulate')) {
             $apiKey = $this->getDeeplApiKey($input);
-            $endpointUrl = $input->getOption('free-license') ? 'api-free.deepl.com' : 'api.deepl.com';
-
             if (empty($apiKey)) {
                 throw new \Exception('DeepL API Key not defined. Please, go to OroPlatform Backoffice, menu System > Configuration > System Configuration > Integrations > DeepL. Or provide the key by the parameter "deepl-api-key" or set the key into the var/deepl-license.key file.');
             } else {
-                $this->deepl = new DeepL($apiKey, 2, $endpointUrl);
+                $this->deepl = new DeepL($apiKey);
             }
         }
     }
@@ -379,8 +376,8 @@ DESC;
         $localeLocale = explode('_', $translation['code']);
         $localeLang = $localeLocale[0];// e.g. de for german
         $text = str_replace($tagsToIgnore, $tagsIgnored, $translation['englishValue']);
-        $deeplTrans = $this->deepl->translate($text, $srcLang, $localeLang, 'xml', ['ignore']);
+        $deeplTrans = $this->deepl->translateText($text, $srcLang, $localeLang, ['tag_handling' => 'xml', 'ignore_tags' => 'ignore']);
 
-        return str_replace($tagsIgnored, $tagsToIgnore, $deeplTrans[0]['text']);
+        return str_replace($tagsIgnored, $tagsToIgnore, $deeplTrans->text);
     }
 }

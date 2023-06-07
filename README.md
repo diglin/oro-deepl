@@ -28,7 +28,7 @@ Same as for the CSV export, on Production environment, you just need to let the 
 
 ## Requirement
 
-- OroPlatform 4.0.x | 4.1.x | 4.2.x (may work on previous versions but not tested)
+- OroPlatform 4.0.x | 4.1.x | 4.2.x | 5.1.* (may work on previous versions but not tested)
 
 ## Configuration
 
