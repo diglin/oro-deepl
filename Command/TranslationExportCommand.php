@@ -193,7 +193,6 @@ DESC;
                     'english_value' => $translation['englishValue'],
                     $locale         => $translated,
                 ];
-                break;
             }
 
             $output->writeln('');
