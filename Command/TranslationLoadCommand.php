@@ -17,8 +17,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
 use Symfony\Component\Yaml\Yaml;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -171,5 +169,7 @@ DESC;
 
         $output->writeln(sprintf('<fg=green>The file %s has been merged with %s with success.</>', $file, $target));
         $output->writeln(sprintf('<fg=yellow>Then run bin/console --env=prod cache:clear && bin/console --env=prod oro:translation:load.</>'));
+
+        return 0;
     }
 }
